@@ -9,6 +9,7 @@ import cx.ath.jbzdak.aztec.Point;
  */
 public interface AztecState {
 
+   
    void addPoint(Point point);
 
    CompressedPoints forceCompressed();
