@@ -2,6 +2,9 @@ package cx.ath.jbzdak.aztec;
 
 import java.io.IOException;
 
+import cx.ath.jbzdak.aztec.compressor.XmlCompressor;
+import cx.ath.jbzdak.aztec.dataSource.SimpleSource;
+
 /**
  * Created by IntelliJ IDEA.
  * User: yaster

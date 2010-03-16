@@ -1,4 +1,7 @@
-package cx.ath.jbzdak.aztec;
+package cx.ath.jbzdak.aztec.dataSource;
+
+import cx.ath.jbzdak.aztec.DataListener;
+import cx.ath.jbzdak.aztec.DataSource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,7 +10,7 @@ package cx.ath.jbzdak.aztec;
  * Time: 6:23:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SimpleSource implements DataSource{
+public class SimpleSource implements DataSource {
 
     DataListener dataListener;
 

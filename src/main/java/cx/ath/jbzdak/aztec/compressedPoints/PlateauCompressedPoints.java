@@ -18,11 +18,19 @@ public class PlateauCompressedPoints implements CompressedPoints{
 
    double yMean;
 
-    public PlateauCompressedPoints() {
-    }
+   public PlateauCompressedPoints() {
+   }
 
-    public PlateauCompressedPoints(int plateauLenght, double yMean) {
+   public PlateauCompressedPoints(int plateauLenght, double yMean) {
       this.plateauLenght = plateauLenght;
       this.yMean = yMean;
+   }
+
+   public int getPlateauLenght() {
+      return plateauLenght;
+   }
+
+   public double getyMean() {
+      return yMean;
    }
 }

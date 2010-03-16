@@ -1,4 +1,4 @@
-package cx.ath.jbzdak.aztec;
+package cx.ath.jbzdak.aztec.compressor;
 
 import com.sun.xml.internal.fastinfoset.stax.factory.StAXOutputFactory;
 
@@ -10,6 +10,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import cx.ath.jbzdak.aztec.Compressor;
 import cx.ath.jbzdak.aztec.compressedPoints.CompressedPoints;
 import cx.ath.jbzdak.aztec.compressedPoints.PlateauCompressedPoints;
 import cx.ath.jbzdak.aztec.compressedPoints.SlopeCompressed;
@@ -21,7 +22,7 @@ import cx.ath.jbzdak.aztec.compressedPoints.SlopeCompressed;
  * Time: 6:04:44 PM
  * To change this template use File | Settings | File Templates.
  */
-public class XmlCompressor implements Compressor{
+public class XmlCompressor implements Compressor {
 
     private static final JAXBContext context;
     static {
