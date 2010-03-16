@@ -5,4 +5,7 @@ package cx.ath.jbzdak.aztec;
  *         Date: Mar 9, 2010
  */
 public interface DataListener {
+
+   public void newPoint(Point point);
+   
 }

@@ -4,15 +4,15 @@ package cx.ath.jbzdak.aztec;
  * @author Jacek Bzdak jbzdak@gmail.com
  *         Date: Mar 9, 2010
  */
-public class Point {
-   
-   double x, y;
+public final class Point {
 
-   public Point() {
+   final double y;
+
+   public Point(double y) {
+      this.y = y;
    }
 
-   public Point(double x, double y) {
-      this.x = x;
-      this.y = y;
+   public double getY() {
+      return y;
    }
 }
