@@ -7,44 +7,52 @@ import cx.ath.jbzdak.aztec.Point;
 import cx.ath.jbzdak.aztec.compressedPoints.CompressedPoints;
 import cx.ath.jbzdak.aztec.compressedPoints.PlateauCompressedPoints;
 
+import static cx.ath.jbzdak.aztec.Config.CONFIG;
+
 /**
  * @author Jacek Bzdak jbzdak@gmail.com
  *         Date: Mar 9, 2010
  */
-public class PlateauState extends AbstractState{
+public class PlateauState implements AztecState{
 
-   final List<Point> savedPoints = new ArrayList<Point>();
+    AztecState nextState;
 
+    CompressedPoints compressed;
 
+    double yMax = Double.MIN_VALUE, yMin = Double.MAX_VALUE;
 
-   boolean plateauEstablished;
+    int plateauLenght = 0;
 
+    public PlateauState(double yMax, double yMin, int plateauLenght) {
+        this.yMax = yMax;
+        this.yMin = yMin;
+        this.plateauLenght = plateauLenght;
+    }
 
-   AztecState newState;
+    public void addPoint(double point) {
+        plateauLenght++;
 
-   CompressedPoints compressedPoints;
+        yMin=point<yMin?point:yMin;
+        yMax=point>yMax?point:yMax;
 
-   PlateauState(){
+        boolean plateauTooWide = (yMax - yMin) > CONFIG.sampleTreshold;
+        boolean plateauTooLong = plateauLenght > CONFIG.samplesMax;
 
-   }
+        if(plateauTooLong || plateauTooWide){
+            compressed = forceCompressed();
+            nextState = new CreateNextRegionStateState();
+        }
+    }
 
-   
+    public CompressedPoints forceCompressed() {
+        return new PlateauCompressedPoints(plateauLenght, (yMax + yMin)/2);
+    }
 
-   public void addPoint(Point point) {
-      plateauLenght++;
-      controlLogic(point.getY());
+    public CompressedPoints getCompressed() {
+        return compressed;
+    }
 
-   }
-
-   public CompressedPoints forceCompressed() {
-      return new PlateauCompressedPoints(plateauLenght, (yMax + yMin)/2);
-   }
-
-   public CompressedPoints getCompressed() {
-      return compressedPoints;
-   }
-
-   public AztecState getNextState() {
-      return newState;
-   }
+    public AztecState getNextState() {
+        return nextState;
+    }
 }
