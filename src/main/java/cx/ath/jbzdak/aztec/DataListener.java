@@ -6,6 +6,8 @@ package cx.ath.jbzdak.aztec;
  */
 public interface DataListener {
 
-   public void newPoint(Point point);
+   public void newPoint(double point);
+
+   public void finished();
    
 }
