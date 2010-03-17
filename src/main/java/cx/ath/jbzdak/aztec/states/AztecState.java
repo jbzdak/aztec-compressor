@@ -1,7 +1,6 @@
 package cx.ath.jbzdak.aztec.states;
 
 import cx.ath.jbzdak.aztec.compressedPoints.CompressedPoints;
-import cx.ath.jbzdak.aztec.Point;
 
 /**
  * @author Jacek Bzdak jbzdak@gmail.com

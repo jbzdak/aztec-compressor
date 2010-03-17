@@ -25,8 +25,8 @@ public class Config {
       } catch (IOException e) {
          e.printStackTrace();
       }
-      samplesMax = Integer.valueOf(properties.getProperty("samplesMax"));
-      sampleTreshold = Integer.valueOf(properties.getProperty("sampleTreshold"));
-      minimalPlateauLenght = Integer.valueOf(properties.getProperty("minimalPlateauLenght"));
+      samplesMax = Integer.parseInt(properties.getProperty("samplesMax"));
+      sampleTreshold = Double.parseDouble(properties.getProperty("sampleTreshold"));
+      minimalPlateauLenght = Integer.parseInt(properties.getProperty("minimalPlateauLenght"));
    }
 }
