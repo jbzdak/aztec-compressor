@@ -14,55 +14,62 @@ import static cx.ath.jbzdak.aztec.Config.CONFIG;
  */
 public class PlateauState implements AztecState{
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(PlateauState.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlateauState.class);
 
-   AztecState nextState;
+    AztecState nextState;
 
-   CompressedPoints compressed;
+    CompressedPoints compressed;
 
-   double yMax = Double.MIN_VALUE, yMin = Double.MAX_VALUE;
+    double yMax = Double.MIN_VALUE, yMin = Double.MAX_VALUE;
 
-   int plateauLenght = 0;
+    int plateauLenght = 0;
 
-   public PlateauState(double yMax, double yMin, int plateauLenght) {
-      this.yMax = yMax;
-      this.yMin = yMin;
-      this.plateauLenght = plateauLenght;
-   }
+    public PlateauState(double yMax, double yMin, int plateauLenght) {
+        this.yMax = yMax;
+        this.yMin = yMin;
+        this.plateauLenght = plateauLenght;
+    }
 
-   public void addPoint(double point) {
-      plateauLenght++;
+    public void addPoint(double point) {
+        plateauLenght++;
 
-      yMin=point<yMin?point:yMin;
-      yMax=point>yMax?point:yMax;
+        double yLastMax = yMax;
+        double yLastMin = yMin;
 
-      boolean plateauTooWide = (yMax - yMin) > CONFIG.sampleTreshold;
-      boolean plateauTooLong = plateauLenght > CONFIG.samplesMax;
-      if(LOGGER.isTraceEnabled()){
-         LOGGER.trace("Adding point {}, yMax is {}, yMin is {}, plateauLenght is {}",
-                 new Object[]{point, yMax, yMin, plateauLenght});
-         LOGGER.trace("PlateuTooWide {}, PlateauLooLong {}", plateauTooWide, plateauTooLong);
-      }
+        yMin=point<yMin?point:yMin;
+        yMax=point>yMax?point:yMax;
 
-      if(plateauTooLong || plateauTooWide){
-         compressed = forceCompressed();
-         nextState = new CreateNextRegionStateState();
-      }
-   }
+        boolean plateauTooWide = (yMax - yMin) > CONFIG.sampleTreshold;
+        boolean plateauTooLong = plateauLenght > CONFIG.samplesMax;
+        if(LOGGER.isTraceEnabled()){
+            LOGGER.trace("Adding point {}, yMax is {}, yMin is {}, plateauLenght is {}",
+                    new Object[]{point, yMax, yMin, plateauLenght});
+            LOGGER.trace("PlateuTooWide {}, PlateauLooLong {}", plateauTooWide, plateauTooLong);
+        }
+        if(plateauTooLong){
+            compressed = forceCompressed();
+            nextState = new CreateNextRegionStateState();
+        }
+        if(plateauTooWide){
+            compressed = new PlateauCompressedPoints(plateauLenght-1,(yLastMax+yLastMin)/2);
+            nextState = new CreateNextRegionStateState();
+            nextState.addPoint(point);
+        }
+    }
 
-   public CompressedPoints forceCompressed() {
-      final double yMean = (yMax + yMin) / 2;
-      if(LOGGER.isTraceEnabled()){
-         LOGGER.trace("Getting compressed points, yMean is {}", yMean);
-      }
-      return new PlateauCompressedPoints(plateauLenght, yMean);
-   }
+    public CompressedPoints forceCompressed() {
+        final double yMean = (yMax + yMin) / 2;
+        if(LOGGER.isTraceEnabled()){
+            LOGGER.trace("Getting compressed points, yMean is {}", yMean);
+        }
+        return new PlateauCompressedPoints(plateauLenght, yMean);
+    }
 
-   public CompressedPoints getCompressed() {
-      return compressed;
-   }
+    public CompressedPoints getCompressed() {
+        return compressed;
+    }
 
-   public AztecState getNextState() {
-      return nextState;
-   }
+    public AztecState getNextState() {
+        return nextState;
+    }
 }

@@ -7,6 +7,7 @@ import cx.ath.jbzdak.aztec.compressor.CompressorDecopressor;
 import cx.ath.jbzdak.aztec.dataSource.PointSetSource;
 import cx.ath.jbzdak.aztec.pointSet.DefaultPointSet;
 import cx.ath.jbzdak.aztec.pointSet.PointSet;
+import cx.ath.jbzdak.aztec.pointSet.SinPointSet;
 
 
 /**
@@ -25,9 +26,10 @@ public class ComparePointsFrame extends JFrame{
    }
 
    public static void main(String[] args){
-      final DefaultPointSet defaultPointSet
-              = new DefaultPointSet("-0.5;0.5;-0.5;0.5;-0.5;0.5;-1;2;3;4.5;5;6;7;8;7;6;5;4;3;2;1;-0.5;0.5;-0.5;0.5;-0.5;0.5;");
-      final PointSetSource dataSource = new PointSetSource(defaultPointSet);
+//      final DefaultPointSet pointSet
+//              = new DefaultPointSet("-0.5;0.5;-0.5;0.5;-0.5;0.5;-1;2;3;4.5;5;5.5;6;7;8;9;0.5;0.5;-0.5;0.5;-0.5;0.5;-1;2;3;4.5;5;6;7;8;9;9.5;7;6;5;4;3;2;1;-0.5;0.5;-0.5;0.5;-0.5;0.5;");
+       final SinPointSet pointSet = new SinPointSet(400);
+       final PointSetSource dataSource = new PointSetSource(pointSet);
       AztecCompressor aztecCompressor = new AztecCompressor(dataSource);
       final CompressorDecopressor decopressor = new CompressorDecopressor();
       aztecCompressor.setCompressor(decopressor);
@@ -35,7 +37,7 @@ public class ComparePointsFrame extends JFrame{
 
       SwingUtilities.invokeLater(new Runnable() {
          public void run() {
-            ComparePointsFrame frame = new ComparePointsFrame(decopressor.getAccumulatedPoints(), defaultPointSet);
+            ComparePointsFrame frame = new ComparePointsFrame(decopressor.getAccumulatedPoints(), pointSet);
             frame.pack();
             frame.setVisible(true);
          }
