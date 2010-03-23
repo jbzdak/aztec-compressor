@@ -7,6 +7,20 @@
    <groupId>aztec</groupId>
    <artifactId>aztec</artifactId>
    <version>1.0</version>
+
+     <repositories>
+      <repository>
+         <id>skimble-public</id>
+         <url>http://skimbleshanks.ath.cx/maven2/</url>
+         <!-- Publiczne repozytorium autora -->
+      </repository>
+      <repository>
+         <id>powermock-repo</id>
+         <url>http://powermock.googlecode.com/svn/repo/</url>
+         <!-- repozytorium frameworki do robienia mocków testów-->
+      </repository>
+   </repositories>
+   
    <dependencies>
       <dependency>
          <groupId>jfree</groupId>
@@ -39,7 +53,21 @@
          <artifactId>mockito-all</artifactId>
          <version>1.8.2</version>
       </dependency>
-   </dependencies>
+   </dependencies><build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
    <build>
         <pluginManagement>
