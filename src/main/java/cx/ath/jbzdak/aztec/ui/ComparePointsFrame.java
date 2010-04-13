@@ -3,9 +3,8 @@ package cx.ath.jbzdak.aztec.ui;
 import javax.swing.*;
 
 import cx.ath.jbzdak.aztec.AztecCompressor;
-import cx.ath.jbzdak.aztec.compressor.CompressorDecopressor;
+import cx.ath.jbzdak.aztec.compressor.CopmpressorDecopressorAproxmation;
 import cx.ath.jbzdak.aztec.dataSource.PointSetSource;
-import cx.ath.jbzdak.aztec.pointSet.DefaultPointSet;
 import cx.ath.jbzdak.aztec.pointSet.PointSet;
 import cx.ath.jbzdak.aztec.pointSet.SinPointSet;
 
@@ -31,7 +30,7 @@ public class ComparePointsFrame extends JFrame{
        final SinPointSet pointSet = new SinPointSet(400);
        final PointSetSource dataSource = new PointSetSource(pointSet);
       AztecCompressor aztecCompressor = new AztecCompressor(dataSource);
-      final CompressorDecopressor decopressor = new CompressorDecopressor();
+      final CopmpressorDecopressorAproxmation decopressor = new CopmpressorDecopressorAproxmation();
       aztecCompressor.setCompressor(decopressor);
       dataSource.go();
 
