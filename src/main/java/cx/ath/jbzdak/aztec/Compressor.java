@@ -10,7 +10,6 @@ import java.io.OutputStream;
  * User: yaster
  * Date: Mar 16, 2010
  * Time: 6:02:39 PM
- * To change this template use File | Settings | File Templates.
  */
 public interface Compressor {
 
