@@ -53,6 +53,11 @@
          <artifactId>mockito-all</artifactId>
          <version>1.8.2</version>
       </dependency>
+       <dependency>
+           <groupId>commons-primitives</groupId>
+           <artifactId>commons-primitives</artifactId>
+           <version>1.0</version>
+       </dependency>
    </dependencies><build>
         <pluginManagement>
             <plugins>

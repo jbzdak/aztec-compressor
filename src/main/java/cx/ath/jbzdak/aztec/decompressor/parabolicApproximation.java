@@ -43,15 +43,17 @@ public class parabolicApproximation implements Decompressor {
       List<Double> result = new ArrayList<Double>();
       for (int i=0;i<3;i++)
       {
-         result.add(dane.get(i));
-      }                
+         //dane.add(0,dane.get(0));
+         //dane.add(dane.get(dane.size()-1));
+         result.add(dane.get(0));
+      }
       for (int i=3;i<dane.size()-3;i++) {
          result.add(approximation7points(dane.subList(i-3,i+1+3).toArray(new Double[]{})));
-      }       /*
-       for (int i=dane.size()-3;i<dane.size();i++)
+      }
+       for (int i=0;i<3;i++)
        {
-           result.add(dane.get(i));
-       }                           */
+           result.add(dane.get(dane.size()-1));
+       }
       return new DefaultPointSet(result);
    }
 

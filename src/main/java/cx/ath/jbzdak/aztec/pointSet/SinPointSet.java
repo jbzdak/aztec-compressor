@@ -1,7 +1,5 @@
 package cx.ath.jbzdak.aztec.pointSet;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: yaster
