@@ -29,6 +29,7 @@ public class ComparePointsPanel extends JPanel{
       dataset.addPointSet("original", original);
       dataset.addPointSet("compressed", compressed);
       JFreeChart chart = ChartFactory.createXYLineChart("Porównanie", "Czas", "Napięcie", dataset, PlotOrientation.VERTICAL, true, false, false);
+
       chartPanel = new ChartPanel(chart);
       add(chartPanel, BorderLayout.CENTER);
    }

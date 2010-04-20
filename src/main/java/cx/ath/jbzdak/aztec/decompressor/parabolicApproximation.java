@@ -34,6 +34,7 @@ public class parabolicApproximation implements Decompressor {
      if (!punkty.isEmpty())
      {
          lastPointAdded = punkty.get(punkty.size()-1);
+         //if (dane.isEmpty()) for (int i=0;i<3;i++) dane.add(punkty.get(0));
          dane.addAll(punkty);
      }
 }
@@ -42,18 +43,29 @@ public class parabolicApproximation implements Decompressor {
       List<Double> result = new ArrayList<Double>();
       for (int i=0;i<3;i++)
       {
-         result.add(0.0); //TODO zmienic zapis 3 pierwszych pkt
-      }
-      for (int i=3;i<dane.size()-1-3;i++) {
          result.add(dane.get(i));
-         //result.add(approximation7points(dane.subList(i-3,i+1+3).toArray(new Double[]{})));
-      }
+      }                
+      for (int i=3;i<dane.size()-3;i++) {
+         result.add(approximation7points(dane.subList(i-3,i+1+3).toArray(new Double[]{})));
+      }       /*
+       for (int i=dane.size()-3;i<dane.size();i++)
+       {
+           result.add(dane.get(i));
+       }                           */
       return new DefaultPointSet(result);
    }
 
    double  approximation7points (Double [] punkty)
    {
-      double temp = 1/21*(-2*punkty[0]+3*punkty[1]+6*punkty[2]+7*punkty[3]+6*punkty[4]+3*punkty[5]-2*punkty[6]);
+      double temp;
+       temp  = -2*punkty[0].doubleValue();
+       temp += 3*punkty[1].doubleValue();
+       temp += 6*punkty[2].doubleValue();
+       temp += 7*punkty[3].doubleValue();
+       temp += 6*punkty[4].doubleValue();
+       temp += 3*punkty[5].doubleValue();
+       temp += -2*punkty[6].doubleValue();
+       temp /= 21;
       return temp;
    }
       List<Double>  decompressPlateau(PlateauCompressedPoints point){
